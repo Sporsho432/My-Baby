@@ -34,9 +34,8 @@ function resizeCanvas() {
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    // IMPORTANT:
-    // Scale the original 1000 x 700 Turtle drawing
-    // so it fits properly on phones and tablets.
+    // Scale the original 1000 x 700 Turtle composition
+    // proportionally so it fits phones, tablets and computers.
 
     drawingScale = Math.min(
         width / DESIGN_WIDTH,
@@ -74,10 +73,8 @@ const WORD = "my love";
 // BLOOM SPEED
 // ============================================================
 //
-// This is intentionally MUCH slower than the previous JS.
-//
-// Your Python version draws individual points of each petal.
-// We do the same thing here.
+// Your original Python version reveals individual points of
+// every petal. This JS version does the same.
 //
 // Smaller number = slower.
 //
@@ -85,10 +82,19 @@ const WORD = "my love";
 // 0.003 = slow / romantic
 // 0.004 = medium
 //
-// I recommend 0.003.
+// Starting at 0.003.
 //
 
 const BLOOM_SPEED = 0.003;
+
+
+// ============================================================
+// RANDOM
+// ============================================================
+
+function random(min, max) {
+    return Math.random() * (max - min) + min;
+}
 
 
 // ============================================================
@@ -167,11 +173,15 @@ function petalPoints(
 // DRAW "MY LOVE"
 // ============================================================
 //
-// IMPORTANT FIX:
-// The color is now supplied to this function.
+// The important difference from the previous JS:
 //
-// This is what restores the original Python colours.
-// ============================================================
+// The color is supplied to this function.
+//
+// Therefore:
+// - lilies retain their yellow/cream colors
+// - orchids retain their purple colors
+// - leaves retain their green colors
+//
 
 function writeLove(
     x,
@@ -235,8 +245,6 @@ function drawLeaf(
 
     for (const point of points) {
 
-        // Green "my love" text,
-        // exactly like the Python version.
         writeLove(
             point.x,
             point.y,
@@ -252,7 +260,9 @@ function drawLeaf(
 
 const leaves = [
 
+    // --------------------------------------------------------
     // FAR LEFT
+    // --------------------------------------------------------
 
     {
         base: { x: -235, y: -55 },
@@ -279,7 +289,9 @@ const leaves = [
     },
 
 
+    // --------------------------------------------------------
     // LEFT SIDE
+    // --------------------------------------------------------
 
     {
         base: { x: -145, y: 15 },
@@ -306,7 +318,9 @@ const leaves = [
     },
 
 
+    // --------------------------------------------------------
     // BETWEEN LEFT FLOWERS
+    // --------------------------------------------------------
 
     {
         base: { x: -80, y: -20 },
@@ -325,7 +339,9 @@ const leaves = [
     },
 
 
+    // --------------------------------------------------------
     // FAR RIGHT
+    // --------------------------------------------------------
 
     {
         base: { x: 235, y: -55 },
@@ -352,7 +368,9 @@ const leaves = [
     },
 
 
+    // --------------------------------------------------------
     // RIGHT SIDE
+    // --------------------------------------------------------
 
     {
         base: { x: 145, y: 15 },
@@ -379,7 +397,9 @@ const leaves = [
     },
 
 
+    // --------------------------------------------------------
     // BETWEEN RIGHT FLOWERS
+    // --------------------------------------------------------
 
     {
         base: { x: 80, y: -20 },
@@ -398,7 +418,9 @@ const leaves = [
     },
 
 
+    // --------------------------------------------------------
     // LOWER CENTER
+    // --------------------------------------------------------
 
     {
         base: { x: -65, y: -70 },
@@ -438,18 +460,20 @@ const leaves = [
 // LILY PALETTE
 // ============================================================
 //
-// EXACTLY based on your Python heart.py
+// Same colors as heart.py:
 //
-// Golden → apricot → ivory → white
-// ============================================================
+// golden-apricot throat
+// soft ivory
+// white tips
+//
 
 const lilyRings = [
 
     {
         radius: 0,
         count: 4,
-        length: 35,
-        width: 14,
+        length: 40,
+        width: 15,
         color: "#f6a821",
         offset: 45
     },
@@ -457,8 +481,8 @@ const lilyRings = [
     {
         radius: 10,
         count: 5,
-        length: 45,
-        width: 23,
+        length: 50,
+        width: 25,
         color: "#ffd27f",
         offset: 0
     },
@@ -466,8 +490,8 @@ const lilyRings = [
     {
         radius: 20,
         count: 7,
-        length: 65,
-        width: 32,
+        length: 70,
+        width: 35,
         color: "#ffe9b3",
         offset: 30
     },
@@ -475,8 +499,8 @@ const lilyRings = [
     {
         radius: 30,
         count: 9,
-        length: 82,
-        width: 40,
+        length: 90,
+        width: 45,
         color: "#fff6df",
         offset: 15
     },
@@ -484,8 +508,8 @@ const lilyRings = [
     {
         radius: 40,
         count: 12,
-        length: 100,
-        width: 50,
+        length: 110,
+        width: 55,
         color: "#fffdf5",
         offset: 0
     }
@@ -496,18 +520,20 @@ const lilyRings = [
 // ORCHID PALETTE
 // ============================================================
 //
-// EXACTLY based on your Python heart.py
+// Same colors as heart.py:
 //
-// Pale lavender → purple → rich magenta-purple
-// ============================================================
+// pale lavender
+// rich purple
+// deep magenta-purple
+//
 
 const orchidRings = [
 
     {
         radius: 0,
         count: 4,
-        length: 35,
-        width: 14,
+        length: 40,
+        width: 15,
         color: "#f7e8ff",
         offset: 45
     },
@@ -515,8 +541,8 @@ const orchidRings = [
     {
         radius: 10,
         count: 5,
-        length: 45,
-        width: 23,
+        length: 50,
+        width: 25,
         color: "#e3bbf2",
         offset: 0
     },
@@ -524,8 +550,8 @@ const orchidRings = [
     {
         radius: 20,
         count: 7,
-        length: 65,
-        width: 32,
+        length: 70,
+        width: 35,
         color: "#c77dff",
         offset: 30
     },
@@ -533,8 +559,8 @@ const orchidRings = [
     {
         radius: 30,
         count: 9,
-        length: 82,
-        width: 40,
+        length: 90,
+        width: 45,
         color: "#9d4edd",
         offset: 15
     },
@@ -542,8 +568,8 @@ const orchidRings = [
     {
         radius: 40,
         count: 12,
-        length: 100,
-        width: 50,
+        length: 110,
+        width: 55,
         color: "#7b2cbf",
         offset: 0
     }
@@ -551,12 +577,10 @@ const orchidRings = [
 
 
 // ============================================================
-// BOUQUET ARRANGEMENT
+// BOUQUET LAYOUT
 // ============================================================
 
 const bouquet = [
-
-    // Back-left orchid
 
     {
         x: -250,
@@ -565,16 +589,12 @@ const bouquet = [
         rings: orchidRings
     },
 
-    // Back-right lily
-
     {
         x: 240,
         y: 85,
         scale: 0.52,
         rings: lilyRings
     },
-
-    // Middle-left lily
 
     {
         x: -145,
@@ -583,8 +603,6 @@ const bouquet = [
         rings: lilyRings
     },
 
-    // Middle-right orchid
-
     {
         x: 140,
         y: 140,
@@ -592,16 +610,12 @@ const bouquet = [
         rings: orchidRings
     },
 
-    // Center-left orchid
-
     {
         x: -55,
         y: 185,
         scale: 0.64,
         rings: orchidRings
     },
-
-    // Center-right lily
 
     {
         x: 55,
@@ -635,53 +649,74 @@ function drawStems() {
     ];
 
     ctx.lineWidth =
-        4 * drawingScale;
+        Math.max(
+            1,
+            4 * drawingScale
+        );
 
     ctx.strokeStyle =
         STEM_COLOR;
 
     ctx.lineCap = "round";
 
-    flowerStems.forEach((flower, i) => {
+    flowerStems.forEach(
+        (flower, i) => {
 
-        ctx.beginPath();
+            ctx.beginPath();
 
-        ctx.moveTo(
-            canvasX(vaseTop.x),
-            canvasY(vaseTop.y)
-        );
-
-        const steps = 40;
-
-        for (let j = 1; j <= steps; j++) {
-
-            const t = j / steps;
-
-            const curve =
-                Math.sin(t * Math.PI) *
-                (i - 2.5) *
-                22;
-
-            const x =
-                vaseTop.x +
-                (flower.x - vaseTop.x) * t +
-                curve;
-
-            const y =
-                vaseTop.y +
-                (flower.y - vaseTop.y) * t;
-
-            ctx.lineTo(
-                canvasX(x),
-                canvasY(y)
+            ctx.moveTo(
+                canvasX(vaseTop.x),
+                canvasY(vaseTop.y)
             );
-        }
 
-        ctx.stroke();
-    });
+            const steps = 40;
+
+            for (
+                let j = 1;
+                j <= steps;
+                j++
+            ) {
+
+                const t =
+                    j / steps;
+
+                const curve =
+                    Math.sin(
+                        t * Math.PI
+                    ) *
+                    (i - 2.5) *
+                    22;
+
+                const x =
+                    vaseTop.x +
+                    (flower.x -
+                        vaseTop.x) *
+                    t +
+                    curve;
+
+                const y =
+                    vaseTop.y +
+                    (flower.y -
+                        vaseTop.y) *
+                    t;
+
+                ctx.lineTo(
+                    canvasX(x),
+                    canvasY(y)
+                );
+            }
+
+            ctx.stroke();
+        }
+    );
 
     ctx.lineWidth = 1;
 }
+
+
+// ============================================================
+// DRAW ALL LEAVES
+// ============================================================
 
 function drawAllLeaves() {
 
@@ -697,19 +732,16 @@ function drawAllLeaves() {
     }
 }
 
+
 // ============================================================
-// FLOWER PETAL POINTS
+// CREATE FLOWER ANIMATION
 // ============================================================
 //
-// This is the important part for matching the Python animation.
+// Instead of using a simple percentage,
+// this creates every individual point of every petal.
 //
-// Instead of saying:
+// This closely follows the generator approach in heart.py.
 //
-// "flower is 30% finished"
-//
-// we actually reveal individual points one by one,
-// like the Python generator did.
-// ============================================================
 
 function createFlowerAnimation(flower) {
 
@@ -720,14 +752,21 @@ function createFlowerAnimation(flower) {
 
     for (const ring of flower.rings) {
 
-        for (let i = 0; i < ring.count; i++) {
+        for (
+            let i = 0;
+            i < ring.count;
+            i++
+        ) {
 
             const angle =
-                (360 / ring.count) * i +
+                (360 / ring.count) *
+                i +
                 ring.offset;
 
             const angleRad =
-                angle * Math.PI / 180;
+                angle *
+                Math.PI /
+                180;
 
             const baseX =
                 cx +
@@ -746,9 +785,11 @@ function createFlowerAnimation(flower) {
                     baseX,
                     baseY,
                     angleRad,
-                    ring.length * flower.scale,
-                    ring.width * flower.scale,
-                    22
+                    ring.length *
+                        flower.scale,
+                    ring.width *
+                        flower.scale,
+                    26
                 );
 
             for (const point of petal) {
@@ -767,21 +808,25 @@ function createFlowerAnimation(flower) {
 
 
 // ============================================================
-// CREATE ALL FLOWER ANIMATIONS
+// CREATE ALL FLOWERS
 // ============================================================
 
-flowers = bouquet.map(flower => {
+const flowers =
+    bouquet.map(
+        flower => {
 
-    return {
-        ...flower,
+            return {
+                ...flower,
 
-        points:
-            createFlowerAnimation(flower),
+                points:
+                    createFlowerAnimation(
+                        flower
+                    ),
 
-        currentPoint: 0
-    };
-
-});
+                currentPoint: 0
+            };
+        }
+    );
 
 
 // ============================================================
@@ -794,10 +839,8 @@ function drawFlowers() {
 
     for (const flower of flowers) {
 
-        // Number of points revealed during this frame.
-        //
-        // Because BLOOM_SPEED is very small,
-        // the flowers bloom slowly.
+        // Reveal only a small number of points
+        // on each animation frame.
 
         const pointsToDraw =
             Math.max(
@@ -807,7 +850,6 @@ function drawFlowers() {
                     BLOOM_SPEED
                 )
             );
-
 
         for (
             let i = 0;
@@ -819,6 +861,7 @@ function drawFlowers() {
                 flower.currentPoint >=
                 flower.points.length
             ) {
+
                 break;
             }
 
@@ -836,7 +879,6 @@ function drawFlowers() {
             flower.currentPoint++;
         }
 
-
         if (
             flower.currentPoint <
             flower.points.length
@@ -851,16 +893,22 @@ function drawFlowers() {
 
 
 // ============================================================
-// DRAW VASE
+// VASE
 // ============================================================
 
 function drawVase() {
 
-    ctx.fillStyle = "#542846";
-    ctx.strokeStyle = VASE_COLOR;
+    ctx.fillStyle =
+        "#542846";
+
+    ctx.strokeStyle =
+        VASE_COLOR;
 
     ctx.lineWidth =
-        2 * drawingScale;
+        Math.max(
+            1,
+            2 * drawingScale
+        );
 
     ctx.beginPath();
 
@@ -900,7 +948,9 @@ function drawVase() {
     ctx.stroke();
 
 
-    // Vase rim
+    // --------------------------------------------------------
+    // VASE RIM
+    // --------------------------------------------------------
 
     ctx.fillStyle =
         "#6b3558";
@@ -936,13 +986,18 @@ function drawVase() {
     ctx.stroke();
 
 
-    // Highlight
+    // --------------------------------------------------------
+    // VASE HIGHLIGHT
+    // --------------------------------------------------------
 
     ctx.strokeStyle =
         "#c987ad";
 
     ctx.lineWidth =
-        2 * drawingScale;
+        Math.max(
+            1,
+            2 * drawingScale
+        );
 
     ctx.beginPath();
 
@@ -975,7 +1030,11 @@ const flowerCenters =
     );
 
 
-for (let i = 0; i < 25; i++) {
+for (
+    let i = 0;
+    i < 25;
+    i++
+) {
 
     let x;
     let y;
@@ -1010,35 +1069,37 @@ function drawHearts() {
     ctx.fillStyle =
         "#ff99cc";
 
-    hearts.forEach(heart => {
+    hearts.forEach(
+        heart => {
 
-        ctx.save();
+            ctx.save();
 
-        ctx.translate(
-            canvasX(heart.x),
-            canvasY(heart.y)
-        );
+            ctx.translate(
+                canvasX(heart.x),
+                canvasY(heart.y)
+            );
 
-        ctx.font =
-            `${Math.max(
-                7,
-                heart.size *
-                drawingScale
-            )}px Courier`;
+            ctx.font =
+                `${Math.max(
+                    7,
+                    heart.size *
+                    drawingScale
+                )}px Courier`;
 
-        ctx.fontWeight = "bold";
+            ctx.fontWeight = "bold";
 
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
 
-        ctx.fillText(
-            "<3",
-            0,
-            0
-        );
+            ctx.fillText(
+                "<3",
+                0,
+                0
+            );
 
-        ctx.restore();
-    });
+            ctx.restore();
+        }
+    );
 }
 
 
@@ -1061,53 +1122,88 @@ function drawBackground() {
 
 
 // ============================================================
-// ANIMATION
+// MAIN ANIMATION
 // ============================================================
 
-let lastTime = 0;
+function animate() {
 
-
-function animate(timestamp) {
+    // --------------------------------------------------------
+    // Background
+    // --------------------------------------------------------
 
     drawBackground();
 
+
+    // --------------------------------------------------------
     // Stems
+    // --------------------------------------------------------
 
     drawStems();
 
-    // Green leaves
+
+    // --------------------------------------------------------
+    // Leaves
+    // --------------------------------------------------------
 
     drawAllLeaves();
 
+
+    // --------------------------------------------------------
     // Flowers
+    // --------------------------------------------------------
 
     const finished =
         drawFlowers();
 
+
+    // --------------------------------------------------------
     // Vase
+    // --------------------------------------------------------
 
     drawVase();
 
-    // Hearts after flowers finish
+
+    // --------------------------------------------------------
+    // Hearts
+    // --------------------------------------------------------
 
     if (finished) {
+
         drawHearts();
     }
 
-    requestAnimationFrame(animate);
+
+    // Continue animation
+
+    requestAnimationFrame(
+        animate
+    );
 }
 
 
 // ============================================================
-// START
+// START ANIMATION
 // ============================================================
 
-requestAnimationFrame(animate);
+requestAnimationFrame(
+    animate
+);
 
 
 // ============================================================
-// RESTART ON CLICK
+// CLICK / TOUCH TO RESTART
 // ============================================================
+
+function restartAnimation() {
+
+    flowers.forEach(
+        flower => {
+
+            flower.currentPoint = 0;
+        }
+    );
+}
+
 
 canvas.addEventListener(
     "click",
@@ -1118,15 +1214,7 @@ canvas.addEventListener(
 canvas.addEventListener(
     "touchstart",
     restartAnimation,
-    { passive: true }
+    {
+        passive: true
+    }
 );
-
-
-function restartAnimation() {
-
-    flowers.forEach(
-        flower => {
-            flower.currentPoint = 0;
-        }
-    );
-}
