@@ -839,10 +839,11 @@ function drawFlowers() {
 
     for (const flower of flowers) {
 
-        // Reveal only a small number of points
-        // on each animation frame.
+        // ----------------------------------------------------
+        // Reveal a small number of NEW points
+        // ----------------------------------------------------
 
-        const pointsToDraw =
+        const pointsToReveal =
             Math.max(
                 1,
                 Math.floor(
@@ -851,33 +852,43 @@ function drawFlowers() {
                 )
             );
 
+        flower.currentPoint =
+            Math.min(
+                flower.currentPoint +
+                pointsToReveal,
+                flower.points.length
+            );
+
+
+        // ----------------------------------------------------
+        // IMPORTANT:
+        //
+        // Redraw EVERYTHING that has already bloomed.
+        //
+        // The canvas is cleared every frame, so previously
+        // revealed flower points must be drawn again.
+        // ----------------------------------------------------
+
         for (
             let i = 0;
-            i < pointsToDraw;
+            i < flower.currentPoint;
             i++
         ) {
 
-            if (
-                flower.currentPoint >=
-                flower.points.length
-            ) {
-
-                break;
-            }
-
             const point =
-                flower.points[
-                    flower.currentPoint
-                ];
+                flower.points[i];
 
             writeLove(
                 point.x,
                 point.y,
                 point.color
             );
-
-            flower.currentPoint++;
         }
+
+
+        // ----------------------------------------------------
+        // Check whether this flower has completely bloomed
+        // ----------------------------------------------------
 
         if (
             flower.currentPoint <
