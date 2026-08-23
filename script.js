@@ -85,7 +85,7 @@ const WORD = "I love you";
 // Starting at 0.003.
 //
 
-const BLOOM_SPEED = 0.010;
+const BLOOM_SPEED = 0.003;
 
 
 // ============================================================
